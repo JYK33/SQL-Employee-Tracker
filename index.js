@@ -13,8 +13,8 @@ const start = async (s) => {
             name: 'choices',
             choices: [
                 'View all departments',
-                'View all employees',
                 'View all roles',
+                'View all employees',
                 'Add a department',
                 'Add a role',
                 'Add an employee',

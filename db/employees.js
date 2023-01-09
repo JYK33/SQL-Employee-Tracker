@@ -1,6 +1,7 @@
 const db = require('./connection');
 const inquirer = require('inquirer');
 const {viewRoles} = require('./roles');
+const { removeListener } = require('./connection');
 
 async function viewEmployees() {
     try{
@@ -62,8 +63,49 @@ async function addEmployee() {
               ]  
             }
         ])
-await
+await db.query(`INSERT into empoyee (first_name, las_name, role_id, manager_id) VALUES ("${firstName}", "${lastName}"), "(${role})", "(${manager})"`)
+const newEmployees = await viewEmployees()
+return newEmployees 
+}catch (err) {
+  console.log(err)
+}
+}
 
-
-    }
+async function updateEmploee() {
+  try {
+    const currentEmployee = await viewEmployees();
+    const employeeRoles = await viewRoles();
+    const {employee, newRole} = await inquirer.promt([
+      {
+        type: 'list',
+        name: 'employee',
+        message: 'which employee should be updated?',
+        choices: currentEmployee.map((e) => {
+          return {
+            name: `${e.first_name} ${e.last_name}`,
+            value: e.id,
+          };
+        }),
+      },
+      {
+        type: 'list',
+        name: 'newRole',
+        message: "what is the employee's new role?",
+        choices: employeeRoles.map((role) => {
+          return {
+            name: role.title,
+            value: role.id,
+          };
+        }),
+      },
+    ]);
+    
+await db.query(
+  `UPDATE employee SET role_id = ${newRole} WHERE id = ${employee}`
+);
+const updatedEmployee = await viewEmployees();
+return await updatedEmployee;
+  } catch (err) {
+    console.log(err);
+  }
 }
