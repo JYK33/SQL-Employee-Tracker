@@ -71,7 +71,7 @@ return newEmployees
 }
 }
 
-async function updateEmploee() {
+async function updateEmployee() {
   try {
     const currentEmployee = await viewEmployees();
     const employeeRoles = await viewRoles();
@@ -99,7 +99,7 @@ async function updateEmploee() {
         }),
       },
     ]);
-    
+
 await db.query(
   `UPDATE employee SET role_id = ${newRole} WHERE id = ${employee}`
 );
@@ -109,3 +109,28 @@ return await updatedEmployee;
     console.log(err);
   }
 }
+
+async function removeEmployee() {
+  try {
+    const currentEmployees = await viewEmployees();
+    const {id} = await inquirer.promt([
+      {
+        type: 'list',
+        message: 'Which employee should be removed?',
+        name: 'id',
+        choices: currentEmployees.map(employee => {
+          return {
+            name: `${employee.first_name}, ${employee.last_name}`,
+            value: employee.id,
+          };
+        }),
+      },
+    ]);
+await db.query(`DELETE FROM employee WHERE id = ${id}`);
+return await viewEmployees(); 
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+module.exports = {viewEmployees, addEmployee, updateEmployee, removeEmployee}

@@ -5,7 +5,7 @@ const inquirer = require("inquirer");
 async function viewDepartments() {
     try{
         const departments = 
-            await db.query("SELECT * FROM department")
+        await db.query("SELECT * FROM department")
                 return departments
     } catch (err){
     console.log(err)
@@ -25,7 +25,7 @@ async function addDepartment () {
             }
         ])
         await db.query(`INSERT into department (name) VALUES ("${name}")`)
-        const newDepartments = await viewDepartments();
+        const newDepartment = await viewDepartments();
         return newDepartment       
     }catch (err){
         console.log(err);
@@ -34,7 +34,7 @@ async function addDepartment () {
 
 async function removeDepartment() {
     try {
-        const viewDepartments = await viewDepartments();
+        const viewAllDepartments = await viewDepartments();
         const {id} = await inquirer.prompt([
             {
                 type: 'list',
@@ -43,7 +43,7 @@ async function removeDepartment() {
                 choices: viewAllDepartments.map((departments) => {
                     return {
                         name : department.name,
-                        value : department.id,
+                        value : department.id
                     };
                 }),
             },
