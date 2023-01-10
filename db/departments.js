@@ -6,7 +6,7 @@ async function viewDepartments() {
     try{
         const departments = 
         await db.query("SELECT * FROM department")
-                return departments
+                return departments;
     } catch (err){
     console.log(err)
     }    

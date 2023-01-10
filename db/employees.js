@@ -1,13 +1,13 @@
 const db = require('./connection');
 const inquirer = require('inquirer');
 const {viewRoles} = require('./roles');
-const { removeListener } = require('./connection');
+// const { removeListener } = require('./connection');
 
 async function viewEmployees() {
     try{
         const employee =
-            await db.query('SELECT employee.id, employee.first_name, role.title, role.salary, employee.manager_id FROM employee LEFT JOIN role ON role.id = employee.role_id')
-                return employee
+        await db.query('SELECT employee.id, employee.first_name, role.title, role.salary, employee.manager_id FROM employee LEFT JOIN role ON role.id = employee.role_id')
+                return employee;
     } catch (err) {
         console.log(err)
     }

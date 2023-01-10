@@ -1,4 +1,4 @@
-const {prompt} = require("inquirer");
+const {prompt, default:inquirer} = require("inquirer");
 const db = require("./db/connection");
 const {viewDepartments, addDepartment, removeDepartment} = require("./db/departments");
 const {viewEmployees, addEmployee, updateEmployee, removeEmployee} = require("./db/employees");
@@ -10,7 +10,7 @@ const start = async (s) => {
         {
             type: 'list',
             message: 'What do you want to?',
-            name: 'choices',
+            name: 'choice',
             choices: [
                 'View all departments',
                 'View all roles',
@@ -26,12 +26,12 @@ const start = async (s) => {
             ]
         }
      ])
+
 console.log(choice)
 switch (choice) {
     case "View all departments":
         const departments = await viewDepartments()
         console.table(departments)
-        console.log(err)
         break;
     case "View all roles":
         const roles = await viewRoles()
@@ -50,12 +50,24 @@ switch (choice) {
         console.table(newRole)
         break;
     case "Add an employee":
-        const newEmployees = await addEmployees()
+        const newEmployees = await addEmployee()
         console.table(newEmployees)
         break;
     case "Update employee role":
         const updatedEmployee = await updateEmployee()
         console.table(updatedEmployee)
+        break;
+    case "Remove an Employee":
+        const removedEmployee = await removeEmployee()
+        console.table(removedEmployee)
+        break;
+    case "Delete a Department":
+        const removedDepartment = await removeDepartment()
+        console.table(removedDepartment)
+        break;
+    case "Delete a Role":
+        const removedRole = await removeRole()
+        console.table(removedRole)
         break;
     case "Exit":
         console.log("GoodBye!");
