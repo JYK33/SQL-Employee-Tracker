@@ -50,7 +50,7 @@ async function addEmployee() {
               name: 'manager',
               message: "who is this employee's manager?",
               choices: [
-                ...viewEmployees.map((e) => {
+                ...employees.map((e) => {
                     return {
                         value: e.id,
                         name: `${e.first_name} ${e.last_name}`
