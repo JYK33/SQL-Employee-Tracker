@@ -58,7 +58,7 @@ async function addRole(){
                     message: 'Which role do you want to remove?',
                     choices: roleList.map((role)=> {
                         return {
-                            nome: role,title,
+                            name: role.title,
                             value: role.id,
                         };
                     }),

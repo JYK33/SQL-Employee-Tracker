@@ -53,19 +53,19 @@ switch (choice) {
         const newEmployees = await addEmployee()
         console.table(newEmployees)
         break;
-    case "Update employee role":
+    case "Update an employee":
         const updatedEmployee = await updateEmployee()
         console.table(updatedEmployee)
         break;
-    case "Remove an Employee":
+    case "Remove an employee":
         const removedEmployee = await removeEmployee()
         console.table(removedEmployee)
         break;
-    case "Delete a Department":
+    case "Remove a department":
         const removedDepartment = await removeDepartment()
         console.table(removedDepartment)
         break;
-    case "Delete a Role":
+    case "Remove a role":
         const removedRole = await removeRole()
         console.table(removedRole)
         break;

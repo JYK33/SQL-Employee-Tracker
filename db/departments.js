@@ -35,12 +35,13 @@ async function addDepartment () {
 async function removeDepartment() {
     try {
         const viewAllDepartments = await viewDepartments();
+        // console.log(viewAllDepartments)
         const {id} = await inquirer.prompt([
             {
                 type: 'list',
                 message: 'which department should be deleted?',
                 name: 'id',
-                choices: viewAllDepartments.map((departments) => {
+                choices: viewAllDepartments.map((department) => {
                     return {
                         name : department.name,
                         value : department.id

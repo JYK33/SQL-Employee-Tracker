@@ -6,7 +6,7 @@ const {viewRoles} = require('./roles');
 async function viewEmployees() {
     try{
         const employee =
-        await db.query('SELECT employee.id, employee.first_name, role.title, role.salary, employee.manager_id FROM employee LEFT JOIN role ON role.id = employee.role_id')
+        await db.query('SELECT employee.id, employee.first_name, employee.last_name, role.title, role.salary, employee.manager_id FROM employee LEFT JOIN role ON role.id = employee.role_id')
                 return employee;
     } catch (err) {
         console.log(err)
@@ -16,7 +16,7 @@ async function viewEmployees() {
 async function addEmployee() {
     try {
         const roles = await viewRoles();
-        const employee = await viewEmployees();
+        const employees = await viewEmployees();
         const {
             firstName,
             lastName,
@@ -75,7 +75,7 @@ async function updateEmployee() {
   try {
     const currentEmployee = await viewEmployees();
     const employeeRoles = await viewRoles();
-    const {employee, newRole} = await inquirer.promt([
+    const {employee, newRole} = await inquirer.prompt([
       {
         type: 'list',
         name: 'employee',
@@ -113,7 +113,7 @@ return await updatedEmployee;
 async function removeEmployee() {
   try {
     const currentEmployees = await viewEmployees();
-    const {id} = await inquirer.promt([
+    const {id} = await inquirer.prompt([
       {
         type: 'list',
         message: 'Which employee should be removed?',
