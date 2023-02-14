@@ -40,7 +40,7 @@ async function addRole(){
                 }),
             }
         ])
-        await db.query(`INSERT into role (title, salary, department_id) VALUES ("${title}", "${salary}", "${department.id}")`)
+        await db.query(`INSERT into role (title, salary, department_id) VALUES ("${title}", "${salary}", "${department_id}")`)
         const newRole = await viewRoles()
         return newRole
     } catch (err) {

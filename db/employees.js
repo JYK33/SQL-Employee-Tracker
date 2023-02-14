@@ -63,7 +63,7 @@ async function addEmployee() {
               ]  
             }
         ])
-await db.query(`INSERT into empoyee (first_name, las_name, role_id, manager_id) VALUES ("${firstName}", "${lastName}"), "(${role})", "(${manager})"`)
+await db.query(`INSERT into employee (first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName}", "${role}", "${manager}")`)
 const newEmployees = await viewEmployees()
 return newEmployees 
 }catch (err) {
